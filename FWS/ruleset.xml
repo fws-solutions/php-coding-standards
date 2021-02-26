@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<ruleset name="FWS">
+    <!-- See https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
+
+    <!-- Set a description for this ruleset. -->
+    <description>
+        Forwardslash PHP Coding Standards, based on PSR2, with some additional settings.
+    </description>
+
+    <!-- Include the whole PSR-2 standard: http://www.php-fig.org/psr/psr-2/ -->
+    <rule ref="PSR2">
+        <!-- We want the K&R rule below, and this interferes with that -->
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+
+        <!-- Forbids empty `catch` statements in try/catch blocks. We don't want
+          empty catch statements either, but we'll accept them if there's a
+          comment explaining why the statement is empty. We handle that case
+          later. -->
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCatch"/>
+    </rule>
+
+
+
+    <!-- 1. Spacings -->
+
+    <!-- Requires a space after typecasting, e.g. `(int) "4"` -->
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+
+    <!-- Forbids whitespace in typecasts, e.g. ( int ) -->
+    <rule ref="Squiz.WhiteSpace.CastSpacing"/>
+
+    <!-- Forbids whitespace before semicolons, e.g. doStuff() ; -->
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+
+    <!-- Requires whitespace around logical operators, e.g. (this && that) -->
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+
+
+
+    <!-- 2. Miscellaneous Formatting -->
+
+    <!-- Require functions braces be on the same line and multi-line arguments
+         are aligned properly:
+        function thing() {
+        function stuff(
+            array $b,
+            $c,
+            callable $z
+        ) {
+    -->
+    <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+
+    <!-- Requires short array syntax, i.e. [] instead of array() -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+    <!-- Forbids Perl-style comments, e.g. # this is a comment -->
+    <rule ref="PEAR.Commenting.InlineComment"/>
+
+
+
+    <!-- 3. Naming -->
+
+    <!-- Force camelCaps for variable names -->
+    <rule ref="Zend.NamingConventions.ValidVariableName"/>
+
+    <!-- Requires camel-caps naming for functions -->
+    <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+        <properties>
+            <!-- allow things like getMyID zomg two caps next to each other! -->
+            <property name="strict" value="false"/>
+        </properties>
+    </rule>
+
+
+
+    <!-- 4. Code Smell -->
+
+    <!-- Forbids empty statements:
+        if (thing) {
+            doStuff();
+        } else {
+            // WHAT IS THIS
+        }
+    -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+
+    <!-- Forbids pointless string concatenations, e.g. "foo"."bar" -->
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+
+    <!-- Requires that include is only used in conditional situations, and
+         require is used elsewhere. Also forbids parenthesis around the file
+         being included, because require/include aren't functions. -->
+    <rule ref="PEAR.Files.IncludingFile"/>
+
+    <!-- Requires empty catch blocks to have a comment explaining why they're
+         empty -->
+    <rule ref="Squiz.Commenting.EmptyCatchComment"/>
+</ruleset>
