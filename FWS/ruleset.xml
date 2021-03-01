@@ -9,8 +9,6 @@
 
     <!-- Include the whole PSR-2 standard: http://www.php-fig.org/psr/psr-2/ -->
     <rule ref="PSR2">
-        <!-- We want the K&R rule below, and this interferes with that -->
-        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
 
         <!-- Forbids empty `catch` statements in try/catch blocks. We don't want
           empty catch statements either, but we'll accept them if there's a
@@ -38,17 +36,6 @@
 
 
     <!-- 2. Miscellaneous Formatting -->
-
-    <!-- Require functions braces be on the same line and multi-line arguments
-         are aligned properly:
-        function thing() {
-        function stuff(
-            array $b,
-            $c,
-            callable $z
-        ) {
-    -->
-    <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
 
     <!-- Requires short array syntax, i.e. [] instead of array() -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
